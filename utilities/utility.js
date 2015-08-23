@@ -1,8 +1,33 @@
-var chunk= function (nameArray, number) {
-  //take nameArray from input field
-  //shuffle that nameArray
-  //take number from input field
-  // split that shuffled array into "number" amount of sections
-  // return the new object arrays with the number being the key and the names being the value [{1: [name1, name2, name3]}, {2: [name4, name5, name6]}, {3: [name7, name8]}]
-  nameArray.
+function shuffle(array) {
+  var counter = array.length, temp, index;
+  while (counter > 0) {
+      index = Math.floor(Math.random() * counter);
+      counter--;
+      temp = array[counter];
+      array[counter] = array[index];
+      array[index] = temp;
+  }
+  return array;
 }
+
+function chunk(shuffledArray, size) {
+  var chunks = [],
+      i = 0,
+      n = shuffledArray.length,
+      num = n/size;
+  while (i < n) {
+    chunks.push(shuffledArray.slice(i, i += num));
+  }
+  return chunks;
+}
+
+function shuffleChunk(inputArray, num) {
+  var shuffledArray = shuffle(inputArray);
+  return chunk(shuffledArray, num);
+}
+
+module.exports = {
+  shuffleChunk: shuffleChunk,
+  chunk: chunk,
+  shuffle: shuffle
+};

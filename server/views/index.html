@@ -1,17 +1,28 @@
 {% extends 'layout.html' %}
 
-{% block title %}{% endblock %}
-
 
 {% block content %}
 
   <div class="container">
 
     <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
-    <p> {{ food }}</p>
-    <p> {{ hello }}</p>
 
+    {% if results %}
+    <h3>Here are your groups!</h3>
+    <ol>
+      {% for result in results %}
+      <li>{{ result }}</li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+
+    <form method="post" action="/submit">
+      <input name="people" type="string" required>
+      <input name="number" type="number" required>
+      <input type="submit">
+    </form>
+
+    <div class="results"></div>
   </div>
 
 {% endblock %}
